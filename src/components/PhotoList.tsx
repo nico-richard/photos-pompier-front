@@ -6,6 +6,7 @@ interface Photo {
     marque: string;
     chassis: string;
     annee: number;
+    image: any;
     timestamp: string;
 }
 
@@ -35,6 +36,13 @@ const PhotoList: React.FC = () => {
                         <p>Marque : {photo.marque}</p>
                         <p>Châssis : {photo.chassis}</p>
                         <p>Année : {photo.annee}</p>
+                        <p>
+                            Image :{" "}
+                            <img
+                                src={`data:image/jpg;base64,${photo.image}`}
+                                alt=""
+                            />
+                        </p>
                         <p>Date de création : {photo.timestamp}</p>
                     </li>
                 ))}

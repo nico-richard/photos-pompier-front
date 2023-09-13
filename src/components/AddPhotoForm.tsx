@@ -5,6 +5,7 @@ interface PhotoData {
     marque: string;
     chassis: string;
     annee: number;
+    image: string | ArrayBuffer;
 }
 
 const AddPhotoForm: React.FC = () => {
@@ -12,13 +13,30 @@ const AddPhotoForm: React.FC = () => {
         marque: "",
         chassis: "",
         annee: 0,
+        image: "",
     });
 
     const handleInputChange = (
         event: React.ChangeEvent<HTMLInputElement>
     ): void => {
         const { name, value } = event.target;
-        setPhotoData({ ...photoData, [name]: value });
+        if (name === "image" && event.target.files) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    if (e.target) {
+                        const imageData = e.target.result;
+                        if (imageData) {
+                            setPhotoData({ ...photoData, [name]: imageData });
+                        }
+                    }
+                };
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        } else {
+            setPhotoData({ ...photoData, [name]: value });
+        }
     };
 
     const handleSubmit = async (event: React.FormEvent): Promise<void> => {
@@ -27,7 +45,12 @@ const AddPhotoForm: React.FC = () => {
         try {
             await addPhoto(photoData);
             alert("Nouvelle photo ajoutée avec succès");
-            setPhotoData({ marque: "", chassis: "", annee: 0 });
+            setPhotoData({
+                marque: "",
+                chassis: "",
+                annee: 0,
+                image: "",
+            });
         } catch (error) {
             console.error("Erreur lors de l'ajout de la photo", error);
         }
@@ -63,6 +86,15 @@ const AddPhotoForm: React.FC = () => {
                         type="number"
                         name="annee"
                         value={photoData.annee}
+                        onChange={handleInputChange}
+                        required
+                    />
+                </label>
+                <label>
+                    Image:
+                    <input
+                        type="file"
+                        name="image"
                         onChange={handleInputChange}
                         required
                     />
