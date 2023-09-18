@@ -18,7 +18,7 @@ export const NavbarCustom = () => {
           to="/"
           sx={{
             color: "red",
-            boxShadow: "0px 0px 10px red",
+            boxShadow: "0px 0px 5px white",
             marginRight: "1rem",
           }}
         >
@@ -28,11 +28,11 @@ export const NavbarCustom = () => {
           PHOTOS POMPIER
         </Typography>
         <Stack direction="row" spacing={2}>
-          <Button component={Link} to="/photos" color="inherit">
+          <Button component={Link} to="/photo" color="inherit">
             Photos
           </Button>
-          <Button component={Link} to="/photo/new" color="inherit">
-            Ajouter
+          <Button component={Link} to="/category" color="inherit">
+            Catégories
           </Button>
           <Button component={Link} to="/rechercher" color="inherit">
             Rechercher

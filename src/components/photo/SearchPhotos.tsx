@@ -1,8 +1,17 @@
 import React, { useState } from "react";
-import { searchPhotos } from "../api";
-import { Typography } from "@mui/material";
+import { searchPhotos } from "../../api";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
-const SearchPhotos: React.FC = () => {
+export const SearchPhotos: React.FC = () => {
   const [query, setQuery] = useState<string>("");
   const [searchResults, setSearchResults] = useState<
     { marque: string; chassis: string; annee: number }[]
@@ -24,15 +33,21 @@ const SearchPhotos: React.FC = () => {
   };
 
   return (
-    <div>
-      <Typography variant="h4">Rechercher des photos</Typography>
-      <input
-        type="text"
-        placeholder="Entrez un critère de recherche"
-        value={query}
-        onChange={handleInputChange}
-      />
-      <button onClick={handleSearch}>Rechercher</button>
+    <Container>
+      <Typography variant="h4" m={3}>
+        Rechercher des photos
+      </Typography>
+      <Stack spacing={2} sx={{ width: "50%" }}>
+        <TextField
+          type="text"
+          placeholder="Entrez un critère de recherche"
+          value={query}
+          onChange={handleInputChange}
+        />
+        <Button variant="contained" onClick={handleSearch}>
+          Rechercher
+        </Button>
+      </Stack>
       <ul>
         {searchResults.map((result, index) => (
           <li key={index}>
@@ -41,8 +56,6 @@ const SearchPhotos: React.FC = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </Container>
   );
 };
-
-export default SearchPhotos;
