@@ -8,12 +8,9 @@ import { AddPhoto } from "./components/photo/AddPhoto";
 import { CategoriesList } from "./components/category/CategoriesList";
 import { AddCategoryForm } from "./components/category/AddCategory";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { themeOptions } from "./interfaces/Theme";
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
+const darkTheme = createTheme(themeOptions);
 
 function App() {
   return (

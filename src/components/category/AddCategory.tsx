@@ -37,11 +37,11 @@ export const AddCategoryForm: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Container sx={{ width: "50%" }}>
       <Typography variant="h4" m={3}>
-        Ajouter une nouvelle photo
+        Ajouter une nouvelle catégorie
       </Typography>
-      <FormControl onSubmit={handleSubmit} sx={{ width: "50%" }}>
+      <form onSubmit={handleSubmit}>
         <Stack spacing={2}>
           <TextField
             type="text"
@@ -55,7 +55,7 @@ export const AddCategoryForm: React.FC = () => {
             Ajouter
           </Button>
         </Stack>
-      </FormControl>
+      </form>
     </Container>
   );
 };

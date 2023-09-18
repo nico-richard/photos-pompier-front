@@ -41,6 +41,7 @@ export const CategoriesList: React.FC = () => {
         onClick={() => {
           navigation("new");
         }}
+        variant="contained"
       >
         Ajouter
       </Button>

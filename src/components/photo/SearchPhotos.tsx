@@ -33,11 +33,11 @@ export const SearchPhotos: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Container sx={{ width: "50%" }}>
       <Typography variant="h4" m={3}>
         Rechercher des photos
       </Typography>
-      <Stack spacing={2} sx={{ width: "50%" }}>
+      <Stack spacing={2}>
         <TextField
           type="text"
           placeholder="Entrez un critère de recherche"

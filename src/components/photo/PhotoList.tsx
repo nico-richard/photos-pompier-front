@@ -15,6 +15,7 @@ import { Photo } from "../../interfaces/Photo";
 import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import { PhotoTable } from "./PhotoTable";
 
 export const PhotoList: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>([]);
@@ -43,37 +44,37 @@ export const PhotoList: React.FC = () => {
         onClick={() => {
           navigation("new");
         }}
+        variant="contained"
       >
         Ajouter
       </Button>
-      <Container>
-        <List>
-          {photos.map((photo) => (
-            <ListItem key={photo.id}>
-              <Stack direction="row" spacing={2}>
-                <ListItemIcon>
-                  <DirectionsBusIcon />
-                </ListItemIcon>
-                <ListItemText primary={photo.marque} />
-                <ListItemIcon>
-                  <CropFreeIcon />
-                </ListItemIcon>
-                <ListItemText primary={photo.chassis} />
-                <ListItemIcon>
-                  <CalendarMonthIcon />
-                </ListItemIcon>
-                <ListItemText primary={photo.annee} />
-                {/* <img
+      <List>
+        {photos.map((photo) => (
+          <ListItem key={photo.id}>
+            <Stack direction="row" spacing={2}>
+              <ListItemIcon>
+                <DirectionsBusIcon />
+              </ListItemIcon>
+              <ListItemText primary={photo.marque} />
+              <ListItemIcon>
+                <CropFreeIcon />
+              </ListItemIcon>
+              <ListItemText primary={photo.chassis} />
+              <ListItemIcon>
+                <CalendarMonthIcon />
+              </ListItemIcon>
+              <ListItemText primary={photo.annee} />
+              {/* <img
               src={`data:image/jpg;base64,${photo.image}`}
               alt=""
               style={{ width: "300px" }}
             /> */}
-                <p>Date de création : {photo.timestamp}</p>
-              </Stack>
-            </ListItem>
-          ))}
-        </List>
-      </Container>
+              <p>Date de création : {photo.timestamp}</p>
+            </Stack>
+          </ListItem>
+        ))}
+      </List>
+      <PhotoTable />
     </Container>
   );
 };
