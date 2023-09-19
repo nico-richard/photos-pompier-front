@@ -1,14 +1,8 @@
 import React, { useState } from "react";
 import { addPhoto } from "../../api";
-import {
-  Button,
-  Container,
-  FormControl,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { Photo } from "../../interfaces/Photo";
+import { useNavigate } from "react-router-dom";
 
 export const AddPhoto: React.FC = () => {
   const [photoData, setPhotoData] = useState<Photo>({
@@ -18,6 +12,7 @@ export const AddPhoto: React.FC = () => {
     image: "",
     timestamp: new Date().toUTCString(),
   });
+  const navigate = useNavigate();
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -47,7 +42,6 @@ export const AddPhoto: React.FC = () => {
 
     try {
       await addPhoto(photoData);
-      alert("Nouvelle photo ajoutée avec succès");
       setPhotoData({
         marque: "",
         chassis: "",
@@ -55,6 +49,7 @@ export const AddPhoto: React.FC = () => {
         image: "",
         timestamp: "",
       });
+      navigate("/photo");
     } catch (error) {
       console.error("Erreur lors de l'ajout de la photo", error);
     }

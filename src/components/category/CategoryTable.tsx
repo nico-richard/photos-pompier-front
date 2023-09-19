@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { getPhotos } from "../../api";
-import { Photo } from "../../interfaces/Photo";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { getCategories } from "../../api";
+import { Category } from "../../interfaces/Category";
+import { useNavigate } from "react-router-dom";
 
-export const PhotoTable: React.FC = () => {
-  const [data, setData] = useState<Photo[]>([]);
+export const CategoryTable: React.FC = () => {
+  const [data, setData] = useState<Category[]>([]);
 
   useEffect(() => {
     // Charger la liste des photos depuis l'API Flask lors du montage du composant
     const fetchPhotos = async () => {
       try {
-        const data = await getPhotos();
+        const data = await getCategories();
         setData(data);
       } catch (error) {
-        console.error("Erreur lors du chargement des photos", error);
+        console.error("Erreur lors du chargement des catégories", error);
       }
     };
 
@@ -22,9 +23,7 @@ export const PhotoTable: React.FC = () => {
 
   const columns: GridColDef[] = [
     { field: "id", headerName: "Id", width: 100, editable: true },
-    { field: "marque", headerName: "Marque", width: 150, editable: true },
-    { field: "chassis", headerName: "Chassis", width: 150, editable: true },
-    { field: "annee", headerName: "Année", width: 150, editable: true },
+    { field: "name", headerName: "Nom", width: 150, editable: true },
   ];
 
   // create editableData which is data with the property editable: true

@@ -26,6 +26,7 @@ function App() {
             <Route path="/category" Component={CategoriesList} />
             <Route path="/category/new" Component={AddCategoryForm} />
             <Route path="/rechercher" Component={SearchPhotos} />
+            <Route path="*" Component={Home} />
           </Routes>
         </div>
       </Router>

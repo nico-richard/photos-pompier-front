@@ -3,23 +3,25 @@ import { addCategory } from "../../api";
 import {
   Button,
   Container,
-  FormControl,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import { Category } from "../../interfaces/Category";
+import { useNavigate } from "react-router-dom";
 
 export const AddCategoryForm: React.FC = () => {
   const [categoryData, setCategoryData] = useState<Category>({
     name: "",
+    description: "",
   });
+  const navigate = useNavigate();
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    const value = event.target.value;
-    setCategoryData({ name: value });
+    const { name, value } = event.target;
+    setCategoryData({ ...categoryData, [name]: value });
   };
 
   const handleSubmit = async (event: React.FormEvent): Promise<void> => {
@@ -30,7 +32,9 @@ export const AddCategoryForm: React.FC = () => {
       alert("Nouvelle photo ajoutée avec succès");
       setCategoryData({
         name: "",
+        description: "",
       });
+      navigate('category')
     } catch (error) {
       console.error("Erreur lors de l'ajout de la photo", error);
     }
@@ -48,6 +52,14 @@ export const AddCategoryForm: React.FC = () => {
             label="Nom"
             name="name"
             value={categoryData.name}
+            onChange={handleInputChange}
+            required
+          />
+          <TextField
+            type="text"
+            label="Description"
+            name="description"
+            value={categoryData.description}
             onChange={handleInputChange}
             required
           />

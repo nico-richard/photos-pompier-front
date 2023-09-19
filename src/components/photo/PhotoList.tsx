@@ -3,37 +3,14 @@ import { getPhotos } from "../../api";
 import {
   Button,
   Container,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Stack,
   Typography,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Photo } from "../../interfaces/Photo";
-import DirectionsBusIcon from "@mui/icons-material/DirectionsBus";
-import CropFreeIcon from "@mui/icons-material/CropFree";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { PhotoTable } from "./PhotoTable";
 
 export const PhotoList: React.FC = () => {
-  const [photos, setPhotos] = useState<Photo[]>([]);
   const navigation = useNavigate();
-
-  useEffect(() => {
-    // Charger la liste des photos depuis l'API Flask lors du montage du composant
-    const fetchPhotos = async () => {
-      try {
-        const data = await getPhotos();
-        setPhotos(data);
-      } catch (error) {
-        console.error("Erreur lors du chargement des photos", error);
-      }
-    };
-
-    fetchPhotos();
-  }, []);
 
   return (
     <Container>
@@ -45,35 +22,10 @@ export const PhotoList: React.FC = () => {
           navigation("new");
         }}
         variant="contained"
+        sx={{ mb: 3 }}
       >
         Ajouter
       </Button>
-      <List>
-        {photos.map((photo) => (
-          <ListItem key={photo.id}>
-            <Stack direction="row" spacing={2}>
-              <ListItemIcon>
-                <DirectionsBusIcon />
-              </ListItemIcon>
-              <ListItemText primary={photo.marque} />
-              <ListItemIcon>
-                <CropFreeIcon />
-              </ListItemIcon>
-              <ListItemText primary={photo.chassis} />
-              <ListItemIcon>
-                <CalendarMonthIcon />
-              </ListItemIcon>
-              <ListItemText primary={photo.annee} />
-              {/* <img
-              src={`data:image/jpg;base64,${photo.image}`}
-              alt=""
-              style={{ width: "300px" }}
-            /> */}
-              <p>Date de création : {photo.timestamp}</p>
-            </Stack>
-          </ListItem>
-        ))}
-      </List>
       <PhotoTable />
     </Container>
   );
