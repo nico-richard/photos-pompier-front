@@ -1,52 +1,77 @@
-import axios from "axios";
-import { Photo } from "./interfaces/Photo";
-import { Category } from "./interfaces/Category";
+import axios from 'axios'
+import { Vehicle } from './interfaces/Vehicle'
+import { Category } from './interfaces/Category'
+import { Vue } from './interfaces/Vues'
+const API_BASE_URL = 'http://localhost:5000' // Remplacez par l'URL de votre API Flask
 
-const API_BASE_URL = "http://localhost:5000"; // Remplacez par l'URL de votre API Flask
-
-export const getPhotos = async () => {
+export const getVehicles = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/photo`);
-    return response.data;
+    const response = await axios.get(`${API_BASE_URL}/vehicles`)
+    return response.data
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
 
-export const addPhoto = async (photoData: Photo) => {
+export const addVehicle = async (vehicleData: Vehicle) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/photo`, photoData);
-    return response.data;
+    const response = await axios.post(`${API_BASE_URL}/vehicle`, vehicleData)
+    return response.data
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
+
+export const deleteVehicle = async (vehicle_id: number) => {
+  try {
+    const response = await axios.delete(`${API_BASE_URL}/vehicle/${vehicle_id}`)
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}
 
 export const getCategories = async () => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/category`);
-    return response.data;
+    const response = await axios.get(`${API_BASE_URL}/categories`)
+    return response.data
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
 
 export const addCategory = async (categoryData: Category) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/category`, categoryData);
-    return response.data;
+    const response = await axios.post(`${API_BASE_URL}/category`, categoryData)
+    return response.data
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
 
-export const searchPhotos = async (query: string) => {
+export const getVuesByVehicleId = async (vehicle_id: number) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/photo/search?q=${query}`);
-    return response.data;
+    const response = await axios.get<Vue[]>(`${API_BASE_URL}/vue/${vehicle_id}`)
+    return response.data
   } catch (error) {
-    throw error;
+    throw error
   }
-};
+}
 
-// Ajoutez d'autres fonctions d'appel à l'API selon les besoins
+export const getPhotosNameToAdd = async () => {
+  try {
+    const response = await axios.get<string[]>(`${API_BASE_URL}/photos-to-add`)
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}
+
+export const addVue = async (vueData: Vue) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/vue`, vueData)
+    return response.data
+  } catch (error) {
+    throw error
+  }
+}

@@ -1,37 +1,29 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { SearchPhotos } from "./components/photo/SearchPhotos";
-import "./styles.sass";
-import { NavbarCustom } from "./components/NavbarCustom";
-import Home from "./components/Home";
-import { PhotoList } from "./components/photo/PhotoList";
-import { AddPhoto } from "./components/photo/AddPhoto";
-import { CategoriesList } from "./components/category/CategoriesList";
-import { AddCategoryForm } from "./components/category/AddCategory";
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import { themeOptions } from "./interfaces/Theme";
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom'
+import './styles.sass'
+import { NavbarCustom } from './components/NavbarCustom'
+import { Home } from './components/Home'
+import { Container, CssBaseline, ThemeProvider, createTheme } from '@mui/material'
+import { themeOptions } from './interfaces/Theme'
+import { Vehicles } from './components/Vehicles'
+import { Categories } from './components/Categories'
 
-const darkTheme = createTheme(themeOptions);
+const darkTheme = createTheme(themeOptions)
 
-function App() {
+export const App = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Router>
-        <div className="App">
-          <NavbarCustom />
+        <NavbarCustom />
+        <Container maxWidth='lg' sx={{ marginTop: '2rem' }}>
           <Routes>
-            <Route path="/" Component={Home} />
-            <Route path="/photo" Component={PhotoList} />
-            <Route path="/photo/new" Component={AddPhoto} />
-            <Route path="/category" Component={CategoriesList} />
-            <Route path="/category/new" Component={AddCategoryForm} />
-            <Route path="/rechercher" Component={SearchPhotos} />
-            <Route path="*" Component={Home} />
+            <Route path='/' element={<Home />} />
+            <Route path='/vehicules' element={<Vehicles />} />
+            <Route path='/categories' element={<Categories />} />
+            <Route path='*' element={<Navigate to={'/'} />} />
           </Routes>
-        </div>
+        </Container>
       </Router>
     </ThemeProvider>
-  );
+  )
 }
-
-export default App;
